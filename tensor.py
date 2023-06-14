@@ -1,7 +1,7 @@
 from __future__ import annotations
 from buffer import Buffer
 
-# Track the parents here for bbackprop?
+# Track the parents here for backprop?
 class Operator():
 
     def forward(self) -> 'None':
@@ -23,7 +23,7 @@ class Tensor():
 
     def __init__(self, data, _children = (), operator = None):
         self.data = Buffer(data, operator)
-        self._previous = set(_children) # May want to use set()? --> no duplicates
+        self._previous = set(_children)
 
     ######## UNARY OPERATORS ########
 
