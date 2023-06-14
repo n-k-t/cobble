@@ -1,9 +1,8 @@
 from tracker import Tracker
 
 class Buffer:
-    def __init__(self, buffer, operator = None):
+    def __init__(self, buffer):
         self.buffer = buffer
-        self.operator = operator
         self.data_type = buffer.dtype
         self.size = buffer.size
         self.memory = self.size * 4
