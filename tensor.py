@@ -1,13 +1,8 @@
 from __future__ import annotations
 from buffer import Buffer
 
-# Track the parents here for backprop?
+# Continue tracking the parents here for backprop?
 class Operator():
-
-    # Right now we are unable to access the parents from a given operator.
-    # It doesn't appear to actually instantiate them. Maybe if I push 
-    # return down a line, calculate the function, and then put it inside of 
-    # a tensor afterwards.
     def __init__(self, *x: Tensor):
         self.parents = x
 
@@ -17,7 +12,8 @@ class Operator():
     @classmethod
     def apply(function, *args, direction = 'forward', **kwargs) -> 'Tensor':
         if direction == 'forward':
-            return Tensor(function.forward(*args), **kwargs, operator = function)
+            fxn = function(*args)
+            return Tensor(fxn.forward(*args), **kwargs, operator = fxn)
         else:
             raise NotImplementedError("This direction has not been implemented yet.")
 
