@@ -23,11 +23,13 @@ import operators
 # May want to add in support to prevent mixed precision operations (i.e. fp16 and fp32).
 # Either that or need to typecast them along the way.
 class Tensor():
-
-    def __init__(self, data, _children = (), operator = None):
+    def __init__(self, data, _children = (), operator = None, requires_gradient = False):
         self.data = Buffer(data)
         self._previous = set(_children)
         self.operator = operator
+        # These are here for when backpropagation gets implemented.
+        # self.requires_gradient = requires_gradient
+        # self.gradient = None
 
     ######## UNARY OPERATORS ########
 
