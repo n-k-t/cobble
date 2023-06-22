@@ -17,6 +17,20 @@ class Operator():
         else:
             raise NotImplementedError("This direction has not been implemented yet.")
 
+######## HELPER FUNCTIONS ########
+
+# Get the strides associated with the shape of the tensor. Because arrays/tensors 
+# are stored linearly in memory, the stride allows us to determine the number of 
+# indices (memory addresses) are required to hop in order to index to a specific 
+# element within the newly shaped tensor.
+def get_stride(shape):
+    stride = [1]
+
+    for i in shape[::-1][:-1]:
+        stride = [i * stride[0]] + stride
+
+    return stride
+
 # Must be here to prevent a circular import.
 import operators
 
@@ -27,6 +41,11 @@ class Tensor():
         self.data = Buffer(data)
         self._previous = set(_children)
         self.operator = operator
+        # May want to abstract this out to another class to make it easier to follow within.
+        # These allow us to track and determine the shapes and strides of our tensors initially.
+        #### I should add it so that these updated as the tensor gets manipulated.
+        self.shape = self.data.buffer.shape
+        self.stride = get_stride(self.shape)
         # These are here for when backpropagation gets implemented.
         # self.requires_gradient = requires_gradient
         # self.gradient = None
