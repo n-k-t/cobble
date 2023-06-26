@@ -25,6 +25,7 @@ import operators
 class Tensor():
     def __init__(self, data, _children = (), operator = None):
         self.data = Buffer(data)
+        # Move this to the lazy tensor???
         self._previous = set(_children)
         self.operator = operator
         # These are here for when backpropagation gets implemented.

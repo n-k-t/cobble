@@ -16,6 +16,8 @@ class BaseOperators():
     SUBTRACT = None
     MULTIPLY = None
     POWER = None
+    INSTANTIATE = None # For the loading/creation operation at the head of a network/for the weights?
+    # This should probably be tracked/better allow integration into the lazy tensor.
 
 
 # Add as many data attributes of the tensor as the user can handle.
