@@ -31,7 +31,7 @@ class Tensor():
             # Find a better way of doing this without importing the operators.
             # There could be a creation method in the class, which moves it there.
             # Would also prevent importing the lazy operator.
-            self.data = LazyTensor(data, LazyOperator(BaseOperators.INSTANTIATE, ()), load = True)
+            self.data = LazyTensor(LazyOperator(BaseOperators.INSTANTIATE, ()), data, load = True)
         # When trying to do a topological search, I run into an issue where root nodes don't work
         # because there is no operator. -> Implement istantiation.
         self.operator = operator

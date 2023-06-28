@@ -1,5 +1,5 @@
 from tensor import Operator
-import numpy as np
+from lazy_tensor import LazyTensor
 
 ######## BASE OPERATORS ########
 
@@ -18,17 +18,18 @@ class BaseOperators():
     POWER = "POWER"
     INSTANTIATE = "INSTANTIATE" # For the loading/creation operation at the head of a network/for the weights?
     # This should probably be tracked/better allow integration into the lazy tensor.
+    MATRIX_MULTIPLY = "MATRIX_MULTIPLY"
 
 
 # Add as many data attributes of the tensor as the user can handle.
 class Addition(Operator):
-    def forward(self, *args) -> 'ndarray':
-        return np.add(*[x.data.buffer for x in args])
+    def forward(self, *args) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(operator = BaseOperators.ADD, data = args)
     
 class Subtraction(Operator):
-    def forward(self, *args) -> 'ndarray':
-        return np.subtract(*[x.data.buffer for x in args])
+    def forward(self, *args) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(operator = BaseOperators.SUBTRACT, data = args)
 
 class MatrixMultiplication(Operator):
-    def forward(self, *args) -> 'ndarray':
-        return np.matmul(*[x.data.buffer for x in args])
+    def forward(self, *args) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(operator = BaseOperators.MATRIX_MULTIPLY, data = args)

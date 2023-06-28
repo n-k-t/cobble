@@ -1,10 +1,9 @@
 from buffer import Buffer
 
 class LazyOperator():
-    # Get this to deal with multiple inputs.
     def __init__(self, operator, *operand):
         self.operator = operator
-        self.operand = set(operand)
+        self.operand = set(*operand)
 
 # Thinking of moving the shapetracker here and tracking it through the operations even 
 # though nothing is executed. The should be doable without strain on the framework.
@@ -16,13 +15,16 @@ class LazyOperator():
 #### operators (what goes on inside the operators).
 ######## Also track the children?
 class LazyTensor():
-    def __init__(self, data, lazy_operator, load = False, executed = False):
+    def __init__(self, lazy_operator, data = None, load = False, executed = False):
+        self.operator = lazy_operator
         if load:
             self.data = Buffer(data)
         else:
-            self.data = None
-        # This is not working with the base operands at the moment, rethink.
-        self.operator = lazy_operator
+            self.data = data
         self.executed = executed
+
+    # Helps create the tree to track the operators as they are applied.
+    def new_lazy_tensor(operator, *x):
+        return LazyTensor(LazyOperator(operator, *x))
 
 
