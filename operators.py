@@ -23,13 +23,13 @@ class BaseOperators():
 
 # Add as many data attributes of the tensor as the user can handle.
 class Addition(Operator):
-    def forward(self, *args) -> 'LazyTensor':
-        return LazyTensor.new_lazy_tensor(operator = BaseOperators.ADD, data = args)
+    def forward(self, *operands) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(BaseOperators.ADD, operands)
     
 class Subtraction(Operator):
-    def forward(self, *args) -> 'LazyTensor':
-        return LazyTensor.new_lazy_tensor(operator = BaseOperators.SUBTRACT, data = args)
+    def forward(self, *operands) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(BaseOperators.SUBTRACT, operands)
 
 class MatrixMultiplication(Operator):
-    def forward(self, *args) -> 'LazyTensor':
-        return LazyTensor.new_lazy_tensor(operator = BaseOperators.MATRIX_MULTIPLY, data = args)
+    def forward(self, *operands) -> 'LazyTensor':
+        return LazyTensor.new_lazy_tensor(BaseOperators.MATRIX_MULTIPLY, operands)

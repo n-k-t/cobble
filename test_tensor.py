@@ -7,13 +7,13 @@ class TestTensor(unittest.TestCase):
         a = np.arange(start = 0, stop = 10, step = 1)
         b = Tensor(data = a)
 
-        np.testing.assert_almost_equal(actual = b.data.buffer, desired = a, decimal = 3)
+        np.testing.assert_almost_equal(actual = b.data.lazy_data.buffer, desired = a, decimal = 3)
     
     def test_shape(self):
         a = np.arange(start = 0, stop = 10, step = 1)
         b = Tensor(data = a)
 
-        self.assertEqual(first = a.shape, second = b.data.buffer.shape)
+        self.assertEqual(first = a.shape, second = b.data.lazy_data.form_tracker.shape)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,7 +1,7 @@
-class Tracker:
+class GlobalTracker:
     memory_used = 0
 
-class Shape:
+class FormTracker:
     def __init__(self, data):
         self.shape = data.shape
         self.stride = self.get_stride()
