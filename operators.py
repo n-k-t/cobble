@@ -12,11 +12,11 @@ import numpy as np
 # None is smaller than lambda: None
 
 class BaseOperators():
-    ADD = None
-    SUBTRACT = None
-    MULTIPLY = None
-    POWER = None
-    INSTANTIATE = None # For the loading/creation operation at the head of a network/for the weights?
+    ADD = "ADD"
+    SUBTRACT = "SUBTRACT"
+    MULTIPLY = "MULTIPLY"
+    POWER = "POWER"
+    INSTANTIATE = "INSTANTIATE" # For the loading/creation operation at the head of a network/for the weights?
     # This should probably be tracked/better allow integration into the lazy tensor.
 
 
