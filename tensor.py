@@ -1,8 +1,7 @@
 from __future__ import annotations
 from lazy_tensor import LazyOperator, LazyTensor
 
-# Continue tracking the parents here for backprop?
-class Operator():
+class Operator:
     def __init__(self, *x: Tensor):
         self.parents = set(x)
 
@@ -20,9 +19,7 @@ class Operator():
 # Must be here to prevent a circular import.
 import operators
 
-# May want to add in support to prevent mixed precision operations (i.e. fp16 and fp32).
-# Either that or need to typecast them along the way.
-class Tensor():
+class Tensor:
     def __init__(self, data, operator = None):
         if data.__class__ == LazyTensor:
             self.data = data
@@ -31,8 +28,6 @@ class Tensor():
             # There could be a creation method in the class, which moves it there.
             # Would also prevent importing the lazy operator.
             self.data = LazyTensor(LazyOperator("INSTANTIATE", ()), data, load = True)
-        # When trying to do a topological search, I run into an issue where root nodes don't work
-        # because there is no operator. -> Implement istantiation.
         self.operator = operator
         # These are here for when backpropagation gets implemented.
         # self.requires_gradient = requires_gradient
