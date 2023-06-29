@@ -32,6 +32,20 @@ class Tensor:
         # These are here for when backpropagation gets implemented.
         # self.requires_gradient = requires_gradient
         # self.gradient = None
+    
+    # Creates a linear traversal to the layer immediately below any instantiations.
+    def topological_sort(self):
+        tensors = []
+        visited = set()
+        def traverse(tensor):
+            visited.add(tensor)
+            if tensor.operator:
+                for i in tensor.operator.parents:
+                    if i not in visited:
+                        traverse(i)
+                tensors.append(tensor)
+        traverse(self)
+        return tensors
 
     ######## UNARY OPERATORS ########
 
