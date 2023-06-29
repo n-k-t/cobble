@@ -2,7 +2,7 @@ class GlobalTracker:
     memory_used = 0
 
 class FormTracker:
-    def __init__(self, data):
+    def __init__(self, data) -> 'FormTracker':
         self.shape = data.shape
         self.stride = self.get_stride()
     
@@ -10,10 +10,8 @@ class FormTracker:
     # are stored linearly in memory, the stride allows us to determine the number of 
     # indices (memory addresses) are required to hop in order to index to a specific 
     # element within the newly shaped tensor.
-    def get_stride(self):
+    def get_stride(self) -> 'Tuple':
         stride = [1]
-
         for i in self.shape[::-1][:-1]:
             stride = [i * stride[0]] + stride
-
         return stride

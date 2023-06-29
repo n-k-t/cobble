@@ -2,7 +2,7 @@ from buffer import Buffer
 from trackers import FormTracker
 
 class LazyOperator:
-    def __init__(self, base_operator, *operands):
+    def __init__(self, base_operator, *operands) -> 'LazyOperator':
         self.base_operator = base_operator
         self.operands = set(*operands)
 
@@ -10,7 +10,7 @@ class LazyOperator:
 #### operators (what goes on inside the operators).
 ######## Also track the children?
 class LazyTensor:
-    def __init__(self, lazy_operator, lazy_data = None, shape_tracker = None, executed = False, load = False):
+    def __init__(self, lazy_operator, lazy_data = None, shape_tracker = None, executed = False, load = False) -> 'LazyTensor':
         self.lazy_operator = lazy_operator
         if load:
             self.lazy_data = Buffer(lazy_data)
@@ -23,7 +23,7 @@ class LazyTensor:
         self.executed = executed
 
     # Helps create the tree to track the operators as they are applied.
-    def new_lazy_tensor(base_operator, *operands):
+    def new_lazy_tensor(base_operator, *operands) -> 'LazyTensor':
         return LazyTensor(LazyOperator(base_operator, *operands))
 
 
