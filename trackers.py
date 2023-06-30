@@ -10,7 +10,7 @@ class FormTracker:
     # are stored linearly in memory, the stride allows us to determine the number of 
     # indices (memory addresses) are required to hop in order to index to a specific 
     # element within the newly shaped tensor.
-    def get_stride(self) -> 'Tuple':
+    def get_stride(self) -> 'tuple':
         stride = [1]
         for i in self.shape[::-1][:-1]:
             stride = [i * stride[0]] + stride

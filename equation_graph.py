@@ -1,4 +1,3 @@
-from tensor import Tensor, Operator
 from operators import *
 
 import networkx as nx
@@ -10,7 +9,8 @@ operator_labels = {
     MatrixMultiplication: 'MATMUL'
 }
 
-def to_svg(root):
+# Will break if there are less than two parents. Should fix for when activation functions are added in.
+def to_svg(root) -> 'None':
     topological = root.topological_sort()
     G = nx.DiGraph()
     for tensor in topological:

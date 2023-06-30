@@ -2,7 +2,7 @@ from __future__ import annotations
 from lazy_tensor import LazyOperator, LazyTensor
 
 class Operator:
-    def __init__(self, *x: Tensor) -> 'Operator':
+    def __init__(self, *x: 'Tensor') -> 'Operator':
         self.parents = set(x)
 
     def forward(self) -> 'None':
@@ -34,7 +34,7 @@ class Tensor:
         # self.gradient = None
     
     # Creates a linear traversal to the layer immediately below any instantiations.
-    def topological_sort(self) -> 'List':
+    def topological_sort(self) -> 'list':
         tensors = []
         visited = set()
         def traverse(tensor):
